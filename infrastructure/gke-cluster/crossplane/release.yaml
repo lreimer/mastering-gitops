@@ -13,4 +13,4 @@ spec:
       version: "1.6.5"
   interval: 1h0m0s
   releaseName: crossplane
-  targetNamespace: crossplane
+  targetNamespace: crossplane-system

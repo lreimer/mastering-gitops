@@ -28,8 +28,17 @@ $ make bootstrap-eks-flux2
 $ make create-gke-cluster
 $ make bootstrap-gke-flux2
 
+# modify Flux kustomization and add
+# - cluster-sync.yaml
+# - notification-receiver.yaml
+# - receiver-service.yaml
+# - webhook-token.yaml
+# - image-update-automation.yaml
+
 $ make destroy-clusters
 ```
+
+
 
 ## Maintainer
 
