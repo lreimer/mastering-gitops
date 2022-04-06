@@ -14,7 +14,3 @@ spec:
   interval: 1h0m0s
   releaseName: crossplane
   targetNamespace: crossplane
-  install:
-    crds: Create
-  upgrade:
-    crds: CreateReplace
