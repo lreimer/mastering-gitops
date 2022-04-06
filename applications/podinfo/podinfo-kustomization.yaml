@@ -11,6 +11,7 @@ spec:
     kind: GitRepository
     name: podinfo
   validation: client
+  targetNamespace: default
   # we supply an inline patch for the deployment
   # patchesJson6902:
   #  - target:
@@ -42,6 +43,5 @@ spec:
       kind: Service
       metadata:
         name: podinfo
-        namespace: default
       spec:
         type: LoadBalancer
