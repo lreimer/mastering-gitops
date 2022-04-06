@@ -5,4 +5,4 @@ resources:
   - kubernetes-sigs-sources.yaml
   - https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.1/components.yaml
   - aws-load-balancer-controller/
-  - crossplane/
+  - crossplane-system/
