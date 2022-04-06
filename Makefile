@@ -16,7 +16,7 @@ create-eks-cluster: iam-policy.json
 bootstrap-eks-flux2:
 	@flux bootstrap github \
 		--owner=$(GITHUB_USER) \
-  		--repository=hands-on-crossplane \
+  		--repository=mastering-gitops \
   		--branch=main \
   		--path=./clusters/eks-cluster \
 		--components-extra=image-reflector-controller,image-automation-controller \
@@ -35,7 +35,7 @@ create-gke-cluster:
 bootstrap-gke-flux2:
 	@flux bootstrap github \
 		--owner=$(GITHUB_USER) \
-  		--repository=hands-on-crossplane \
+  		--repository=mastering-gitops \
   		--branch=main \
   		--path=./clusters/gke-cluster \
 		--components-extra=image-reflector-controller,image-automation-controller \
