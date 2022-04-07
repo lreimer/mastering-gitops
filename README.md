@@ -157,7 +157,10 @@ kubectl crossplane build configuration --ignore=examples/example-db.yaml,example
 For examples of the GCP provider have a look the [Github repository](https://github.com/crossplane/provider-gcp/tree/master/examples)
 
 ```bash
-
+# we need to create a GCP service account and secret
+gcloud iam service-accounts create crossplane-system --display-name=Crossplane
+gcloud iam service-accounts keys create gcp-credentials.json --iam-account crossplane-system@cloud-native-night.iam.gserviceaccount.com
+kubectl create secret generic gcp-credentials -n crossplane-system --from-file=credentials=./gcp-credentials.json
 ```
 
 ## Maintainer
