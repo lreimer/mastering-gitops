@@ -12,6 +12,24 @@ You need to have the following tools installed locally to be able to complete al
 - [flux](https://fluxcd.io/docs/get-started/)
 - [Helm](https://helm.sh/docs/intro/install/)
 
+## Local Installation
+
+For local installation simply follow the instructions found on the official [Crossplane documentation](https://crossplane.io/docs/v1.7/getting-started/install-configure.html).
+
+```bash
+# install latest Crossplane release using Helm in a dedicated namespace
+kubectl create namespace crossplane-system
+
+helm repo add crossplane-stable https://charts.crossplane.io/stable
+helm repo update
+
+helm install crossplane --namespace crossplane-system crossplane-stable/crossplane --set provider.packages={crossplane/provider-aws:v0.24.1}
+
+## check everything came up OK
+helm list -n crossplane-system
+kubectl get all -n crossplane-system
+```
+
 ## Bootstrapping
 
 ```bash
@@ -42,24 +60,6 @@ $ kubectl -n flux-system get svc/receiver
 $ kubectl -n flux-system get receiver/webapp
 
 $ make destroy-clusters
-```
-
-## Local Installation
-
-For local installation simply follow the instructions found on the official [Crossplane documentation](https://crossplane.io/docs/v1.7/getting-started/install-configure.html).
-
-```bash
-# install latest Crossplane release using Helm in a dedicated namespace
-kubectl create namespace crossplane-system
-
-helm repo add crossplane-stable https://charts.crossplane.io/stable
-helm repo update
-
-helm install crossplane --namespace crossplane-system crossplane-stable/crossplane --set provider.packages={crossplane/provider-aws:v0.25.0}
-
-## check everything came up OK
-helm list -n crossplane-system
-kubectl get all -n crossplane-system
 ```
 
 ## AWS Provider
