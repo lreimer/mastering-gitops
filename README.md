@@ -93,7 +93,7 @@ kubectl apply -f sns/topic.yaml
 aws sns list-topics
 kubectl apply -f sns/subscription.yaml
 aws sns list-subscriptions
-aws sns publish --subject Test --message Crossplane --topic-arn arn:aws:sns:eu-central-1:<ACCOUNT_NUMBER>:email-topic
+aws sns publish --subject Test --message Crossplane --topic-arn arn:aws:sns:eu-central-1:<AWS_ACCOUNT_ID>:email-topic
 
 # create a SQS queue
 kubectl apply -f sqs/queue.yaml
