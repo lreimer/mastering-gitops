@@ -1,0 +1,14 @@
+apiVersion: sns.aws.crossplane.io/v1beta1
+kind: Subscription
+metadata:
+  name: email-subscription
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: eu-central-1
+    protocol: email
+    endpoint: mario-leander.reimer@qaware.de
+    topicArnRef:
+      name: email-topic
+  providerConfigRef:
+    name: providerconfig-aws

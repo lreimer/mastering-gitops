@@ -1,0 +1,20 @@
+apiVersion: sqs.aws.crossplane.io/v1beta1
+kind: Queue
+metadata:
+  name: test-queue.fifo
+  labels:
+    region: eu-central-1
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: eu-central-1
+    contentBasedDeduplication: true
+    delaySeconds: 3
+    # the name must have .fifo suffix
+    fifoQueue: true
+    # 2 KB message size
+    maximumMessageSize: 2048
+    # 5 minutes
+    messageRetentionPeriod: 300
+  providerConfigRef:
+    name: providerconfig-aws

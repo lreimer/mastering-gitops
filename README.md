@@ -73,49 +73,36 @@ kubectl create secret generic aws-credentials -n crossplane-system --from-file=c
 # we could manually installe the AWS provider
 # kubectl crossplane install provider crossplane/provider-aws:v0.24.1
 
-cd crossplane
-kubectl apply -n crossplane-system -f aws/provider.yaml
-kubectl apply -n crossplane-system -f aws/providerconfig.yaml
+cd crossplane/aws/
+kubectl apply -n crossplane-system -f provider.yaml
+kubectl apply -n crossplane-system -f providerconfig.yaml
 
 kubectl get events
 kubectl get crds
 
 # create an S3 bucket in eu-central-1
-kubectl apply -f aws/s3/bucket.yaml
+kubectl apply -f s3/bucket.yaml
 aws s3 ls
 
 # create an ECR in eu-central-1
-kubectl apply -f aws/ecr/repository.yaml
+kubectl apply -f ecr/repository.yaml
 aws ecr describe-repositories
 
 # create SNS topic and subscription
-kubectl apply -f aws/sns/topic.yaml
+kubectl apply -f sns/topic.yaml
 aws sns list-topics
-kubectl apply -f aws/sns/subscription.yaml
+kubectl apply -f sns/subscription.yaml
 aws sns list-subscriptions
 aws sns publish --subject Test --message Crossplane --topic-arn arn:aws:sns:eu-central-1:<ACCOUNT_NUMBER>:email-topic
 
 # create a SQS queue
-kubectl apply -f aws/sqs/queue.yaml
+kubectl apply -f sqs/queue.yaml
 aws sqs list-queues
 
-# create EFS file system and mount point
-k apply -f aws/efs/filesystem.yaml
-aws efs describe-file-systems
-k apply -f aws/efs/mounttarget.yaml
-# the mount target takes some time to be available
-aws efs describe-mount-targets --file-system-id <FileSystemId>
-
-# create MQ brokers
-kubectl create secret generic test-activemq-admin -n crossplane-system --from-literal=password=testPassword123
-kubectl apply -f aws/mq/activemq-broker.yaml
-kubectl get broker
-kubectl describe secret test-activemq
-
-kubectl create secret generic test-rabbitmq-admin -n crossplane-system --from-literal=password=testPassword123
-kubectl apply -f aws/mq/rabbitmq-broker.yaml
-kubectl get broker
-kubectl describe secret test-rabbitmq
+# create Aurora Serverless
+kubectl apply -f db/aurora-serverless.yaml
+aws rds describe-db-clusters
+kubectl apply -f db/aurora-client.yaml
 
 # use XRD to create an ECR
 kubectl apply -f xrd/repository/definition.yaml

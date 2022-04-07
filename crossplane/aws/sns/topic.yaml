@@ -1,0 +1,11 @@
+apiVersion: sns.aws.crossplane.io/v1beta1
+kind: Topic
+metadata:
+  name: email-topic
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    name: email-topic
+    region: eu-central-1
+  providerConfigRef:
+    name: providerconfig-aws
