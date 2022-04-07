@@ -4,7 +4,7 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -17,7 +17,7 @@ metadata:
   name: applications
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   dependsOn:
     - name: infrastructure
   sourceRef:
@@ -33,7 +33,7 @@ metadata:
   name: crossplane-aws
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   dependsOn:
     - name: infrastructure
   sourceRef:

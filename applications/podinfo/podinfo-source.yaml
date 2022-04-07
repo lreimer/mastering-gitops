@@ -4,7 +4,7 @@ metadata:
   name: podinfo
   namespace: default
 spec:
-  interval: 30s
+  interval: 5m0s
   url: https://github.com/stefanprodan/podinfo
   ref:
     tag: 6.0.0
