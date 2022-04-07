@@ -146,8 +146,21 @@ For examples of the GCP provider have a look the [Github repository](https://git
 ```bash
 # we need to create a GCP service account and secret
 gcloud iam service-accounts create crossplane-system --display-name=Crossplane
+gcloud projects add-iam-policy-binding cloud-native-night --role=roles/storage.admin --member serviceAccount:crossplane-system@cloud-native-night.iam.gserviceaccount.com
 gcloud iam service-accounts keys create gcp-credentials.json --iam-account crossplane-system@cloud-native-night.iam.gserviceaccount.com
+
 kubectl create secret generic gcp-credentials -n crossplane-system --from-file=credentials=./gcp-credentials.json
+
+# we could manually installe the AWS provider
+# kubectl crossplane install provider crossplane/provider-gcp:v0.21.0
+
+cd crossplane/gcp/
+kubectl apply -n crossplane-system -f provider.yaml
+kubectl apply -n crossplane-system -f providerconfig.yaml
+
+# create an storage bucket in eu-central-1
+kubectl apply -f storage/bucket.yaml
+gsutil ls
 ```
 
 ## Maintainer
