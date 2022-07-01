@@ -146,10 +146,10 @@ For examples of the GCP provider have a look the [Github repository](https://git
 ```bash
 # we need to create a GCP service account and secret
 gcloud iam service-accounts create crossplane-system --display-name=Crossplane
-gcloud projects add-iam-policy-binding cloud-native-night --role=roles/iam.serviceAccountUser --member serviceAccount:crossplane-system@cloud-native-night.iam.gserviceaccount.com
-gcloud projects add-iam-policy-binding cloud-native-night --role=roles/storage.admin --member serviceAccount:crossplane-system@cloud-native-night.iam.gserviceaccount.com
+gcloud projects add-iam-policy-binding cloud-native-experience-lab --role=roles/iam.serviceAccountUser --member serviceAccount:crossplane-system@cloud-native-experience-lab.iam.gserviceaccount.com
+gcloud projects add-iam-policy-binding cloud-native-experience-lab --role=roles/storage.admin --member serviceAccount:crossplane-system@cloud-native-experience-lab.iam.gserviceaccount.com
 
-gcloud iam service-accounts keys create gcp-credentials.json --iam-account crossplane-system@cloud-native-night.iam.gserviceaccount.com
+gcloud iam service-accounts keys create gcp-credentials.json --iam-account crossplane-system@cloud-native-experience-lab.iam.gserviceaccount.com
 
 kubectl create secret generic gcp-credentials -n crossplane-system --from-file=credentials=./gcp-credentials.json
 

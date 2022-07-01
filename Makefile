@@ -4,7 +4,7 @@ iam-policy.json:
 		--policy-name AWSLoadBalancerControllerIAMPolicy \
 		--policy-document file://iam-policy.json
 
-create-eks-cluster: iam-policy.json
+create-eks-cluster:
 	@eksctl create cluster -f eks-cluster.yaml
 	@eksctl create iamserviceaccount \
 		--cluster=eks-crossplane-cluster \
@@ -28,7 +28,7 @@ prepare-gke-cluster:
 	@gcloud config set container/use_client_certificate False
 
 create-gke-cluster:
-	@gcloud container clusters create gke-crossplane-cluster --num-nodes=3 --enable-autoscaling --min-nodes=3 --max-nodes=5 --cluster-version=1.21.6-gke.1503
+	@gcloud container clusters create gke-crossplane-cluster --num-nodes=3 --enable-autoscaling --min-nodes=3 --max-nodes=5 --cluster-version=1.19
 	@kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$$(gcloud config get-value core/account)
 	@kubectl cluster-info
 
