@@ -3,7 +3,7 @@ kind: ProviderConfig
 metadata:
   name: providerconfig-gcp
 spec:
-  projectID: cloud-native-night
+  projectID: cloud-native-experience-lab
   credentials:
     source: Secret
     secretRef:
