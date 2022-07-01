@@ -1,6 +1,6 @@
-# Mastering GitOps
+# kubectl apply -f cloud-infrastructure.yaml with Crossplane
 
-Demo repository for my Crossplane talk at the Mastering GitOps conference.
+Demo repository for my Crossplane conference talk.
 
 ## Prerequisites
 
