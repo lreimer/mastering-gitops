@@ -4,10 +4,16 @@ kind: ClusterConfig
 metadata:
   name: eks-crossplane-cluster
   region: eu-central-1
-  version: "1.19"
+  version: '1.21'
 
 iam:
   withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: aws-load-balancer-controller
+      namespace: kube-system
+    wellKnownPolicies:
+      awsLoadBalancerController: true
 
 vpc:
   clusterEndpoints:
@@ -18,15 +24,8 @@ cloudWatch:
   clusterLogging:
     enableTypes: ["*"]
 
-fargateProfiles:
-  - name: fp-default
-    selectors:
-      - namespace: default
-        labels:
-          scheduler: fargate
-            
 managedNodeGroups:
-  - name: managed-ng-1
+  - name: crossplane-cluster-ng-1
     instanceType: t3.medium
     minSize: 3
     maxSize: 5
@@ -39,6 +38,6 @@ managedNodeGroups:
       nodegroup-role: worker
     iam:
       withAddonPolicies:
-        externalDNS: true
-        certManager: true
         albIngress: true
+        awsLoadBalancerController: true
+        cloudWatch: true

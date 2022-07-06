@@ -1,17 +1,5 @@
-iam-policy.json:
-	@curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
-	@aws iam create-policy \
-		--policy-name AWSLoadBalancerControllerIAMPolicy \
-		--policy-document file://iam-policy.json
-
 create-eks-cluster:
 	@eksctl create cluster -f eks-cluster.yaml
-	@eksctl create iamserviceaccount \
-		--cluster=eks-crossplane-cluster \
-		--namespace=kube-system \
-		--name=aws-load-balancer-controller \
-		--attach-policy-arn=arn:aws:iam::$(AWS_ACCOUNT_ID):policy/AWSLoadBalancerControllerIAMPolicy \
-		--approve
 
 bootstrap-eks-flux2:
 	@flux bootstrap github \
